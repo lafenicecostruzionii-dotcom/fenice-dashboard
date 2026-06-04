@@ -1,16 +1,10 @@
 {
-  "aggiornato": "04/06/2026 15:16",
-  "pipeline_lordo": 7506464.09,
-  "forecast_ponderato": 1575037.6,
-  "vinto_ytd": 0,
-  "pipeline_count": 509,
+  "aggiornato": "04/06/2026 15:20",
+  "pipeline_lordo": 3871703.91,
+  "forecast_ponderato": 1398676.01,
+  "vinto_ytd": 1753320.3,
+  "pipeline_count": 95,
   "fasi": [
-    {
-      "nome": "",
-      "valore": 3282037.0,
-      "count": 294,
-      "gid": ""
-    },
     {
       "nome": "Decisione Rinviata",
       "valore": 3206525.83,
@@ -19,8 +13,8 @@
     },
     {
       "nome": "Preventivo Presentato",
-      "valore": 1017901.2599999999,
-      "count": 138,
+      "valore": 665178.08,
+      "count": 18,
       "gid": "1215315713358014"
     },
     {
@@ -33,13 +27,8 @@
   "tipologie": [
     {
       "nome": "Condomini",
-      "valore": 3577671.35,
-      "count": 78
-    },
-    {
-      "nome": "N/D",
-      "valore": 3282037.0,
-      "count": 405
+      "valore": 3224948.17,
+      "count": 69
     },
     {
       "nome": "Privati",
@@ -78,22 +67,10 @@
       "importo": 350000.0
     },
     {
-      "nome": "Condominio centro commerciale Europa ] Compilazione documento preventivo",
-      "fase": "",
-      "pipeline": "",
-      "importo": 300000.0
-    },
-    {
       "nome": "Saletti via Ximenes 3",
       "fase": "Decisione Rinviata",
       "pipeline": "Condomini",
       "importo": 290387.0
-    },
-    {
-      "nome": "Pica Laura via Lago di Varano 41-43",
-      "fase": "",
-      "pipeline": "",
-      "importo": 280000.0
     },
     {
       "nome": "Steccati via Marche 2-4-6 consegna",
@@ -102,16 +79,28 @@
       "importo": 250000.0
     },
     {
-      "nome": "SANTORI VIA DE AMICIS 8",
-      "fase": "",
-      "pipeline": "",
-      "importo": 230000.0
+      "nome": "Anna Meroni - Arcille",
+      "fase": "Decisione Rinviata",
+      "pipeline": "Privati",
+      "importo": 186391.62
     },
     {
-      "nome": "VIA GIULIO CESARE",
-      "fase": "",
-      "pipeline": "",
-      "importo": 200000.0
+      "nome": "[Via Ametista 6]",
+      "fase": "Decisione Rinviata",
+      "pipeline": "Condomini",
+      "importo": 146477.0
+    },
+    {
+      "nome": "Papiro via Fiesole 88 Compilazione documento preventivo",
+      "fase": "Decisione Rinviata",
+      "pipeline": "Privati",
+      "importo": 141400.0
+    },
+    {
+      "nome": "Marina di Grosseto - Piscopo Agostino Capitaneria di Porto",
+      "fase": "Decisione Rinviata",
+      "pipeline": "Privati",
+      "importo": 97590.0
     }
   ],
   "assemblee_30gg": 9,
@@ -126,7 +115,7 @@
   ],
   "ferme_14gg": 0,
   "ferme_30gg": 0,
-  "senza_data_ass": 25,
+  "senza_data_ass": 16,
   "persi_senza_motivo": 40,
   "vinti_senza_importo": 27,
   "tasso_privati": 11.8,
@@ -135,33 +124,18 @@
   "accenturatori": [
     {
       "nome": "Saletti",
-      "progetti": 29,
-      "valore": 1424709.01
+      "progetti": 6,
+      "valore": 1168079.01
     },
     {
       "nome": "VIA",
-      "progetti": 50,
-      "valore": 1397307.3
+      "progetti": 7,
+      "valore": 484408.7
     },
     {
       "nome": "Cortecci",
-      "progetti": 2,
+      "progetti": 1,
       "valore": 350000.0
-    },
-    {
-      "nome": "Machado",
-      "progetti": 20,
-      "valore": 340373.4
-    },
-    {
-      "nome": "Pica",
-      "progetti": 4,
-      "valore": 308709.0
-    },
-    {
-      "nome": "Condominio",
-      "progetti": 3,
-      "valore": 300000.0
     },
     {
       "nome": "Steccati",
@@ -169,19 +143,34 @@
       "valore": 250000.0
     },
     {
-      "nome": "[Via",
-      "progetti": 4,
-      "valore": 235877.0
-    },
-    {
-      "nome": "SANTORI",
-      "progetti": 6,
-      "valore": 230000.0
-    },
-    {
       "nome": "Anna Meroni",
-      "progetti": 3,
+      "progetti": 1,
       "valore": 186391.62
+    },
+    {
+      "nome": "Machado",
+      "progetti": 3,
+      "valore": 164883.26
+    },
+    {
+      "nome": "[Via",
+      "progetti": 1,
+      "valore": 146477.0
+    },
+    {
+      "nome": "Papiro",
+      "progetti": 1,
+      "valore": 141400.0
+    },
+    {
+      "nome": "Cannas",
+      "progetti": 2,
+      "valore": 133226.37
+    },
+    {
+      "nome": "Marina di Grosseto",
+      "progetti": 1,
+      "valore": 97590.0
     }
   ],
   "prev_attivi": 38,
