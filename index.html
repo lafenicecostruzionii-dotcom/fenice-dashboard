@@ -6,565 +6,659 @@
 <title>La Fenice — Dashboard CEO</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root {
+:root{
   --bg:#0a0e1a;--bg2:#0f1628;--bg3:#141d35;--surface:#1a2540;--surface2:#1f2d4a;
   --border:rgba(255,255,255,0.07);--gold:#c9a84c;--gold2:#e8c97a;--teal:#2dd4bf;
-  --red:#f87171;--green:#4ade80;--yellow:#fbbf24;--blue:#60a5fa;
+  --red:#f87171;--green:#4ade80;--yellow:#fbbf24;--blue:#60a5fa;--purple:#a78bfa;
   --text:#e8edf5;--text2:#8b9bc0;--text3:#5a6b8a;--accent:#3b5bdb;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 0%,rgba(59,91,219,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(201,168,76,.08) 0%,transparent 60%);pointer-events:none;z-index:0}
-.container{max-width:1400px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
-header{padding:28px 0 20px;border-bottom:1px solid var(--border);margin-bottom:32px}
-.header-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.logo-area{display:flex;align-items:center;gap:16px}
-.logo-mark{width:48px;height:48px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#0a0e1a;flex-shrink:0}
-.logo-text h1{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text);letter-spacing:-.3px}
-.logo-text p{font-size:11px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
-.header-meta{display:flex;align-items:center;gap:20px}
-.last-update{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace}
-.live-badge{display:flex;align-items:center;gap:6px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--green);font-weight:500}
-.live-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-.nav-tabs{display:flex;gap:4px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:4px;margin-bottom:32px;width:fit-content}
-.nav-tab{padding:8px 20px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;color:var(--text2);transition:all .2s;border:none;background:none;white-space:nowrap}
-.nav-tab:hover{color:var(--text);background:var(--surface)}
-.nav-tab.active{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
-.section{display:none;animation:fadeIn .3s ease}
-.section.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.section-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;margin-bottom:24px;color:var(--text)}
-.section-title span{color:var(--gold)}
-.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
-.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px}
-.grid-2-1{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:24px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;position:relative;overflow:hidden;transition:border-color .2s}
-.card:hover{border-color:rgba(255,255,255,.12)}
-.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.02) 0%,transparent 60%);pointer-events:none}
-.card-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:12px}
-.card-value{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--text);line-height:1;margin-bottom:8px}
-.card-value.big{font-size:38px}
+.wrap{max-width:1440px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+/* Header */
+header{padding:24px 0 20px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.hdr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.logo{display:flex;align-items:center;gap:14px}
+.logo-mark{width:44px;height:44px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#0a0e1a}
+.logo h1{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text)}
+.logo p{font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.hdr-right{display:flex;align-items:center;gap:16px}
+.ts{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace}
+.live{display:flex;align-items:center;gap:6px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);border-radius:20px;padding:3px 10px;font-size:11px;color:var(--green);font-weight:500}
+.dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+/* Nav */
+.nav{display:flex;gap:3px;background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:3px;margin-bottom:28px;width:fit-content}
+.ntab{padding:7px 18px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;color:var(--text2);border:none;background:none;transition:all .2s;white-space:nowrap}
+.ntab:hover{color:var(--text);background:var(--surface)}
+.ntab.active{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
+/* Sections */
+.sec{display:none;animation:fi .3s ease}
+.sec.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.sec-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:20px}
+.sec-title span{color:var(--gold)}
+/* Grids */
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:20px}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:20px;align-items:start}
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.02),transparent 60%);pointer-events:none}
+.card-lbl{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:10px}
+.card-val{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;line-height:1;margin-bottom:6px}
 .card-sub{font-size:12px;color:var(--text2)}
-.card-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600;margin-top:8px}
-.badge-green{background:rgba(74,222,128,.12);color:var(--green)}
-.badge-red{background:rgba(248,113,113,.12);color:var(--red)}
-.badge-yellow{background:rgba(251,191,36,.12);color:var(--yellow)}
-.badge-gold{background:rgba(201,168,76,.12);color:var(--gold2)}
-.progress-wrap{margin:12px 0 6px}
-.progress-bar-bg{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
-.progress-bar-fill{height:100%;border-radius:3px;transition:width 1s ease}
-.fill-green{background:linear-gradient(90deg,#22c55e,#4ade80)}
-.fill-yellow{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
-.fill-gold{background:linear-gradient(90deg,var(--gold),var(--gold2))}
-.progress-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:4px}
-.fase-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
-.fase-row:last-child{border-bottom:none}
-.fase-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.fase-nome{flex:1;font-size:13px;color:var(--text2)}
-.fase-count{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;width:24px;text-align:center}
-.fase-valore{font-size:13px;font-weight:600;color:var(--text);font-family:'DM Mono',monospace;width:90px;text-align:right}
-.fase-bar-wrap{width:80px;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
-.fase-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--blue))}
-.donut-wrap{display:flex;align-items:center;gap:20px}
-.donut-legend{flex:1}
-.legend-item{display:flex;align-items:center;gap:8px;padding:6px 0}
-.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.legend-label{font-size:12px;color:var(--text2);flex:1}
-.legend-value{font-size:12px;color:var(--text);font-weight:600;font-family:'DM Mono',monospace}
-.legend-pct{font-size:11px;color:var(--text3);width:36px;text-align:right}
-.alert-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;margin-bottom:8px;font-size:13px}
-.alert-red{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.15)}
-.alert-yellow{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.15)}
-.alert-green{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.15)}
-.alert-icon{font-size:16px;flex-shrink:0}
-.alert-text{flex:1;color:var(--text2)}
-.alert-value{font-weight:600;color:var(--text);font-family:'DM Mono',monospace;font-size:12px}
-.ai-section{background:var(--bg2);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-top:8px}
-.ai-header{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(59,91,219,.1),rgba(201,168,76,.05))}
-.ai-avatar{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),#5c7cfa);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.ai-title{font-size:14px;font-weight:600;color:var(--text)}
-.ai-subtitle{font-size:11px;color:var(--text3);margin-top:1px}
-.ai-messages{height:360px;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
-.ai-messages::-webkit-scrollbar{width:4px}
-.ai-messages::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-.msg{display:flex;gap:10px;animation:msgIn .3s ease}
-@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.msg.user{flex-direction:row-reverse}
-.msg-avatar{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-top:2px}
-.msg-avatar.ai{background:linear-gradient(135deg,var(--accent),#5c7cfa)}
-.msg-avatar.user{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0e1a;font-weight:700}
-.msg-bubble{max-width:80%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.6}
-.msg.ai .msg-bubble{background:var(--surface);border:1px solid var(--border);color:var(--text2);border-top-left-radius:4px}
-.msg.user .msg-bubble{background:linear-gradient(135deg,var(--accent),#4a6cf7);color:white;border-top-right-radius:4px}
-.typing-indicator{display:flex;gap:4px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:12px;border-top-left-radius:4px;width:fit-content}
-.typing-dot{width:6px;height:6px;background:var(--text3);border-radius:50%;animation:typing 1.4s infinite}
-.typing-dot:nth-child(2){animation-delay:.2s}
-.typing-dot:nth-child(3){animation-delay:.4s}
-@keyframes typing{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-6px);opacity:1}}
-.ai-input-area{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:center}
-.ai-input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
-.ai-input:focus{border-color:rgba(59,91,219,.4)}
-.ai-input::placeholder{color:var(--text3)}
-.ai-send{width:38px;height:38px;background:linear-gradient(135deg,var(--accent),#5c7cfa);border:none;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;flex-shrink:0;transition:opacity .2s,transform .1s}
-.ai-send:hover{opacity:.9;transform:scale(1.05)}
-.ai-send:active{transform:scale(.95)}
-.ai-send:disabled{opacity:.4;cursor:not-allowed}
-.quick-questions{display:flex;gap:8px;padding:0 16px 12px;flex-wrap:wrap}
-.quick-q{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:11px;color:var(--text2);cursor:pointer;transition:all .2s;white-space:nowrap}
-.quick-q:hover{border-color:rgba(59,91,219,.4);color:var(--text);background:rgba(59,91,219,.08)}
-.motivo-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.motivo-label{font-size:12px;color:var(--text2);width:130px;flex-shrink:0}
-.motivo-bar-wrap{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
-.motivo-bar{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--red),#fb7185)}
-.motivo-count{font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;width:24px;text-align:right}
-.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.card-title{font-size:13px;font-weight:600;color:var(--text)}
-.card-tag{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;letter-spacing:.5px}
-.tag-live{background:rgba(74,222,128,.12);color:var(--green)}
-.tag-target{background:rgba(201,168,76,.12);color:var(--gold2)}
-.divider{height:1px;background:var(--border);margin:16px 0}
-@media(max-width:1100px){.grid-4{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:700px){.grid-4,.grid-3,.grid-2,.grid-2-1{grid-template-columns:1fr}}
+.card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.card-ttl{font-size:13px;font-weight:600;color:var(--text)}
+.ctag{font-size:10px;padding:2px 7px;border-radius:4px;font-weight:600}
+.tg-live{background:rgba(74,222,128,.12);color:var(--green)}
+.tg-warn{background:rgba(251,191,36,.12);color:var(--yellow)}
+.tg-crit{background:rgba(248,113,113,.12);color:var(--red)}
+/* Status indicator */
+.status-bar{display:flex;align-items:center;gap:8px;margin-top:10px;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:600}
+.s-green{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2);color:var(--green)}
+.s-yellow{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2);color:var(--yellow)}
+.s-red{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);color:var(--red)}
+/* Progress */
+.prg-wrap{margin:10px 0 4px}
+.prg-bg{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prg-fill{height:100%;border-radius:3px;transition:width 1s ease}
+.f-green{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.f-yellow{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.f-red{background:linear-gradient(90deg,#ef4444,#f87171)}
+.f-gold{background:linear-gradient(90deg,var(--gold),var(--gold2))}
+.f-teal{background:linear-gradient(90deg,#14b8a6,#2dd4bf)}
+.f-blue{background:linear-gradient(90deg,#3b82f6,#60a5fa)}
+.prg-lbls{display:flex;justify-content:space-between;font-size:9px;color:var(--text3);margin-top:3px}
+/* Rows */
+.row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.row:last-child{border-bottom:none}
+.rdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.rname{flex:1;font-size:12px;color:var(--text2)}
+.rcount{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;width:22px;text-align:center}
+.rval{font-size:12px;font-weight:600;font-family:'DM Mono',monospace;width:80px;text-align:right}
+.rbar{width:70px;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;flex-shrink:0}
+.rbar-fill{height:100%;border-radius:2px}
+/* Donut */
+.dw{display:flex;align-items:center;gap:16px}
+.dl{flex:1}
+.li{display:flex;align-items:center;gap:7px;padding:5px 0}
+.li-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.li-lbl{font-size:12px;color:var(--text2);flex:1}
+.li-val{font-size:12px;color:var(--text);font-weight:600;font-family:'DM Mono',monospace}
+.li-pct{font-size:11px;color:var(--text3);width:32px;text-align:right}
+/* Alerts */
+.al{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;margin-bottom:7px;font-size:12px}
+.al-r{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.15)}
+.al-y{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.15)}
+.al-g{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.15)}
+.al-ico{font-size:15px;flex-shrink:0}
+.al-txt{flex:1;color:var(--text2)}
+.al-val{font-weight:700;color:var(--text);font-family:'DM Mono',monospace}
+/* Gauge */
+.gauge-wrap{position:relative;text-align:center;padding:4px 0}
+/* Divider */
+.div{height:1px;background:var(--border);margin:14px 0}
+/* Top deals */
+.deal-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.deal-row:last-child{border-bottom:none}
+.deal-n{flex:1;font-size:12px;color:var(--text2)}
+.deal-fase{font-size:10px;padding:2px 6px;border-radius:4px;background:var(--bg3);color:var(--text3);white-space:nowrap}
+.deal-val{font-size:12px;font-weight:700;font-family:'DM Mono',monospace;color:var(--gold2);width:75px;text-align:right}
+/* Assemblee tabs */
+.asm-tabs{display:flex;gap:4px;margin-bottom:12px}
+.atab{flex:1;padding:6px;text-align:center;border-radius:7px;font-size:11px;cursor:pointer;border:1px solid var(--border);background:var(--bg3);color:var(--text2);transition:all .2s}
+.atab.active{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.3);color:var(--gold2)}
+/* AI */
+.ai-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+.ai-hdr{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(59,91,219,.1),rgba(201,168,76,.05))}
+.ai-av{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#5c7cfa);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ai-ttl{font-size:13px;font-weight:600;color:var(--text)}
+.ai-sub{font-size:10px;color:var(--text3);margin-top:1px}
+.ai-msgs{height:380px;overflow-y:auto;padding:14px 18px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.ai-msgs::-webkit-scrollbar{width:3px}
+.ai-msgs::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.msg{display:flex;gap:8px;animation:mi .3s ease}
+@keyframes mi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.msg.u{flex-direction:row-reverse}
+.mav{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:2px}
+.mav.ai{background:linear-gradient(135deg,var(--accent),#5c7cfa)}
+.mav.u{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0e1a;font-weight:700}
+.mb{max-width:82%;padding:9px 13px;border-radius:11px;font-size:13px;line-height:1.6}
+.msg.ai .mb{background:var(--surface);border:1px solid var(--border);color:var(--text2);border-top-left-radius:3px}
+.msg.u .mb{background:linear-gradient(135deg,var(--accent),#4a6cf7);color:white;border-top-right-radius:3px}
+.typing{display:flex;gap:4px;padding:11px 13px;background:var(--surface);border:1px solid var(--border);border-radius:11px;border-top-left-radius:3px;width:fit-content}
+.td{width:5px;height:5px;background:var(--text3);border-radius:50%;animation:ty 1.4s infinite}
+.td:nth-child(2){animation-delay:.2s}
+.td:nth-child(3){animation-delay:.4s}
+@keyframes ty{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+.ai-inp-area{padding:10px 14px;border-top:1px solid var(--border);display:flex;gap:8px;align-items:center}
+.ai-inp{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:9px 13px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+.ai-inp:focus{border-color:rgba(59,91,219,.4)}
+.ai-inp::placeholder{color:var(--text3)}
+.ai-btn{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),#5c7cfa);border:none;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;font-size:15px;transition:opacity .2s}
+.ai-btn:hover{opacity:.85}
+.ai-btn:disabled{opacity:.35;cursor:not-allowed}
+.qq{display:flex;gap:6px;padding:0 14px 10px;flex-wrap:wrap}
+.q{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:4px 10px;font-size:11px;color:var(--text2);cursor:pointer;transition:all .2s;white-space:nowrap}
+.q:hover{border-color:rgba(59,91,219,.4);color:var(--text);background:rgba(59,91,219,.08)}
+.ai-note{padding:10px 18px;background:rgba(248,113,113,.06);border-top:1px solid rgba(248,113,113,.1);font-size:11px;color:var(--red);text-align:center}
+/* Responsive */
+@media(max-width:1100px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.g4,.g3,.g2,.g21{grid-template-columns:1fr}.nav{flex-wrap:wrap}}
 </style>
 </head>
 <body>
-<div class="container">
+<div class="wrap">
 
+<!-- HEADER -->
 <header>
-  <div class="header-inner">
-    <div class="logo-area">
-      <div class="logo-mark">F</div>
-      <div class="logo-text">
-        <h1>La Fenice Costruzioni</h1>
-        <p>CEO Dashboard &mdash; Anno 2026</p>
-      </div>
-    </div>
-    <div class="header-meta">
-      <span class="last-update" id="lastUpdate">Caricamento...</span>
-      <div class="live-badge"><div class="live-dot"></div>Live</div>
+<div class="hdr">
+  <div class="logo">
+    <div class="logo-mark">F</div>
+    <div>
+      <h1>La Fenice Costruzioni</h1>
+      <p>CEO Dashboard &mdash; 2026</p>
     </div>
   </div>
+  <div class="hdr-right">
+    <span class="ts" id="ts">Caricamento...</span>
+    <div class="live"><div class="dot"></div>Live</div>
+  </div>
+</div>
 </header>
 
-<div class="nav-tabs">
-  <button class="nav-tab active" onclick="showSection('commerciale',this)">&#128200; Commerciale</button>
-  <button class="nav-tab" onclick="showSection('preventivi',this)">&#128295; Preventivi</button>
-  <button class="nav-tab" onclick="showSection('cantieri',this)">&#127959; Cantieri</button>
-  <button class="nav-tab" onclick="showSection('consulente',this)">&#129302; Consulente AI</button>
+<!-- NAV -->
+<div class="nav">
+  <button class="ntab active" onclick="show('c',this)">&#128200; Commerciale</button>
+  <button class="ntab" onclick="show('p',this)">&#128295; Preventivi</button>
+  <button class="ntab" onclick="show('k',this)">&#127959; Cantieri</button>
+  <button class="ntab" onclick="show('a',this)">&#129302; Consulente AI</button>
 </div>
 
-<!-- COMMERCIALE -->
-<div class="section active" id="section-commerciale">
-  <p class="section-title">Reparto <span>Commerciale</span></p>
-  <div class="grid-4">
-    <div class="card">
-      <div class="card-label">Vinto 2026 YTD</div>
-      <div class="card-value big" id="vintoYtd" style="color:#e8c97a">&#8364;0</div>
-      <div class="progress-wrap">
-        <div class="progress-bar-bg"><div class="progress-bar-fill fill-gold" id="vintoBar" style="width:0%"></div></div>
-        <div class="progress-labels"><span>0</span><span>Target &#8364;4.8M</span></div>
-      </div>
-      <div class="card-badge badge-yellow" id="vintoBadge">0% del target</div>
-    </div>
-    <div class="card">
-      <div class="card-label">Pipeline Attiva</div>
-      <div class="card-value big" style="color:#e8c97a" id="pipelineVal">&#8364;4.003M</div>
-      <div class="card-sub" id="pipelineCount">38 trattative aperte</div>
-      <div class="card-badge badge-gold">Dati aggiornati in tempo reale</div>
-    </div>
-    <div class="card">
-      <div class="card-label">Forecast Ponderato</div>
-      <div class="card-value big" style="color:#2dd4bf" id="forecastVal">&#8364;1.438M</div>
-      <div class="card-sub">36% della pipeline</div>
-      <div class="card-badge badge-yellow">Target mensile &#8364;300k</div>
-    </div>
-    <div class="card">
-      <div class="card-label">Costo Acquisizione</div>
-      <div class="card-value" style="color:#4ade80;font-size:36px">0.77%</div>
-      <div class="card-sub">del vinto &mdash; &#8364;37.2k/anno Davide</div>
-      <div class="card-badge badge-green">Eccellente (benchmark 2-5%)</div>
-    </div>
-  </div>
+<!-- ===== COMMERCIALE ===== -->
+<div class="sec active" id="sec-c">
+<p class="sec-title">Reparto <span>Commerciale</span></p>
 
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Pipeline per Fase Commerciale</div>
-        <span class="card-tag tag-live">LIVE</span>
-      </div>
-      <div id="faseRows"></div>
+<!-- Row 1: KPI principali -->
+<div class="g4">
+  <!-- Vinto YTD -->
+  <div class="card">
+    <div class="card-lbl">Vinto 2026 YTD</div>
+    <div class="card-val" style="color:var(--gold2)" id="v-vinto">&euro;0</div>
+    <div class="prg-wrap">
+      <div class="prg-bg"><div class="prg-fill f-gold" id="v-vinto-bar" style="width:0%"></div></div>
+      <div class="prg-lbls"><span>0</span><span>Target &euro;4.8M</span></div>
     </div>
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Pipeline per Tipologia</div>
-        <span class="card-tag tag-live">LIVE</span>
-      </div>
-      <div class="donut-wrap">
-        <svg width="110" height="110" viewBox="0 0 110 110">
-          <circle cx="55" cy="55" r="42" fill="none" stroke="var(--bg3)" stroke-width="14"/>
-          <circle cx="55" cy="55" r="42" fill="none" stroke="#3b5bdb" stroke-width="14" stroke-dasharray="176 88" stroke-dashoffset="66" transform="rotate(-90 55 55)"/>
-          <circle cx="55" cy="55" r="42" fill="none" stroke="#c9a84c" stroke-width="14" stroke-dasharray="58 206" stroke-dashoffset="-110" transform="rotate(-90 55 55)"/>
-          <circle cx="55" cy="55" r="42" fill="none" stroke="#2dd4bf" stroke-width="14" stroke-dasharray="32 232" stroke-dashoffset="-168" transform="rotate(-90 55 55)"/>
-          <text x="55" y="50" text-anchor="middle" fill="var(--text)" font-size="13" font-family="Playfair Display" font-weight="700">66%</text>
-          <text x="55" y="64" text-anchor="middle" fill="var(--text3)" font-size="9">Cond.</text>
-        </svg>
-        <div class="donut-legend">
-          <div class="legend-item">
-            <div class="legend-dot" style="background:#3b5bdb"></div>
-            <span class="legend-label">Condomini</span>
-            <span class="legend-value">&#8364;2.650M</span>
-            <span class="legend-pct">66%</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background:#c9a84c"></div>
-            <span class="legend-label">Privati</span>
-            <span class="legend-value">&#8364;890k</span>
-            <span class="legend-pct">22%</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot" style="background:#2dd4bf"></div>
-            <span class="legend-label">PA/Corporate</span>
-            <span class="legend-value">&#8364;463k</span>
-            <span class="legend-pct">12%</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="status-bar s-red" id="v-vinto-status">&#128308; 0% &mdash; Dati in aggiornamento</div>
   </div>
-
-  <div class="grid-3">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Assemblee Prossimi 30gg</div>
-        <span class="card-tag tag-target">CRITICO</span>
-      </div>
-      <div class="card-value" style="color:#e8c97a;font-size:38px" id="assemblee30">5</div>
-      <div class="card-sub" style="margin-bottom:12px">assemblee in scadenza</div>
-      <div style="padding:12px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:10px;">
-        <div style="font-size:12px;color:var(--text3);margin-bottom:4px">Valore a rischio</div>
-        <div style="font-size:22px;font-family:'Playfair Display',serif;font-weight:700;color:var(--gold2)">&#8364;720.000</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header"><div class="card-title">Motivi di Perdita</div></div>
-      <div id="motiviRows"></div>
-    </div>
-    <div class="card">
-      <div class="card-header"><div class="card-title">Alert Operativi</div></div>
-      <div class="alert-item alert-red"><span class="alert-icon">&#9200;</span><span class="alert-text">Trattative ferme 14gg+</span><span class="alert-value" id="alertFerme">8</span></div>
-      <div class="alert-item alert-red"><span class="alert-icon">&#10067;</span><span class="alert-text">Persi senza motivo</span><span class="alert-value" id="alertPersi">12</span></div>
-      <div class="alert-item alert-yellow"><span class="alert-icon">&#128197;</span><span class="alert-text">Assemblee senza data</span><span class="alert-value">16</span></div>
-      <div class="alert-item alert-red"><span class="alert-icon">&#128176;</span><span class="alert-text">Vinti senza importo</span><span class="alert-value">2</span></div>
-      <div class="alert-item alert-green"><span class="alert-icon">&#9989;</span><span class="alert-text">Campi portfolio OK</span><span class="alert-value">38/38</span></div>
-    </div>
+  <!-- Pipeline -->
+  <div class="card">
+    <div class="card-lbl">Pipeline Attiva Totale</div>
+    <div class="card-val" style="color:var(--gold2)">&euro;4.003M</div>
+    <div class="card-sub">38 trattative aperte</div>
+    <div class="status-bar s-green">&#128994; Dati aggiornati</div>
+  </div>
+  <!-- Forecast -->
+  <div class="card">
+    <div class="card-lbl">Forecast Ponderato</div>
+    <div class="card-val" style="color:var(--teal)">&euro;1.438M</div>
+    <div class="card-sub">36% della pipeline attiva</div>
+    <div class="status-bar s-yellow">&#128993; Target mensile &euro;300k</div>
+  </div>
+  <!-- Costo acquisizione -->
+  <div class="card">
+    <div class="card-lbl">Costo Acquisizione (Davide)</div>
+    <div class="card-val" style="color:var(--green);font-size:30px">0.77%</div>
+    <div class="card-sub">&euro;37.2k/anno &mdash; benchmark settore 2-5%</div>
+    <div class="status-bar s-green">&#128994; Eccellente</div>
   </div>
 </div>
 
-<!-- PREVENTIVI -->
-<div class="section" id="section-preventivi">
-  <p class="section-title">Reparto <span>Preventivi</span></p>
-  <div class="grid-4">
-    <div class="card">
-      <div class="card-label">Preventivi Settimana</div>
-      <div style="display:flex;align-items:baseline;gap:8px">
-        <div class="card-value big" style="color:#fbbf24">5</div>
-        <div style="font-size:18px;color:var(--text3)">/ 7</div>
-      </div>
-      <div class="progress-wrap">
-        <div class="progress-bar-bg"><div class="progress-bar-fill fill-yellow" style="width:71%"></div></div>
-        <div class="progress-labels"><span>0</span><span>Target 7</span></div>
-      </div>
-      <div class="card-badge badge-yellow">71% del target</div>
-    </div>
-    <div class="card">
-      <div class="card-label">Tempo Ciclo Medio</div>
-      <div class="card-value big" style="color:#e8c97a">18 <span style="font-size:16px;color:var(--text2)">gg</span></div>
-      <div class="card-sub">dalla creazione al completamento</div>
-      <div class="card-badge badge-yellow">Target &lt;14gg</div>
-    </div>
-    <div class="card">
-      <div class="card-label">Scostamento Medio Riccardo</div>
-      <svg viewBox="0 0 160 90" style="width:100%;max-width:160px;display:block;margin:0 auto">
-        <path d="M16 80 A64 64 0 0 1 144 80" fill="none" stroke="var(--bg3)" stroke-width="10" stroke-linecap="round"/>
-        <path d="M16 80 A64 64 0 0 1 80 16" fill="none" stroke="rgba(74,222,128,.25)" stroke-width="10" stroke-linecap="round"/>
-        <path d="M80 16 A64 64 0 0 1 144 80" fill="none" stroke="rgba(251,191,36,.25)" stroke-width="10" stroke-linecap="round"/>
-        <line x1="80" y1="80" x2="34" y2="38" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
-        <circle cx="80" cy="80" r="5" fill="#fbbf24"/>
-        <text x="80" y="68" text-anchor="middle" fill="var(--text)" font-size="15" font-family="Playfair Display" font-weight="700">6.8%</text>
-        <text x="18" y="92" fill="var(--green)" font-size="8">0%</text>
-        <text x="72" y="12" fill="var(--yellow)" font-size="8">5%</text>
-        <text x="130" y="92" fill="var(--red)" font-size="8">10%+</text>
-      </svg>
-      <div class="card-badge badge-yellow" style="display:table;margin:4px auto 0">Sopra target 5%</div>
-    </div>
-    <div class="card">
-      <div class="card-label">Qualit&agrave; Dati Portfolio</div>
-      <div class="card-value big" style="color:#4ade80">94%</div>
-      <div class="progress-wrap">
-        <div class="progress-bar-bg"><div class="progress-bar-fill fill-green" style="width:94%"></div></div>
-        <div class="progress-labels"><span>0%</span><span>Target 100%</span></div>
-      </div>
-      <div class="card-badge badge-green">Campi obbligatori compilati</div>
-    </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Attivi per Tipologia &amp; Conversione</div>
-      </div>
-      <div class="fase-row">
-        <div class="fase-dot" style="background:#c9a84c"></div>
-        <div class="fase-nome">Privati</div>
-        <div class="fase-count">8</div>
-        <div class="fase-bar-wrap"><div class="fase-bar-fill" style="width:35%;background:linear-gradient(90deg,#c9a84c,#e8c97a)"></div></div>
-        <div class="fase-valore" style="color:var(--gold2)">Conv. 35%</div>
-      </div>
-      <div class="fase-row">
-        <div class="fase-dot" style="background:#3b5bdb"></div>
-        <div class="fase-nome">Condomini</div>
-        <div class="fase-count">26</div>
-        <div class="fase-bar-wrap"><div class="fase-bar-fill" style="width:22%"></div></div>
-        <div class="fase-valore">Conv. 22%</div>
-      </div>
-      <div class="fase-row">
-        <div class="fase-dot" style="background:#2dd4bf"></div>
-        <div class="fase-nome">PA / Corporate</div>
-        <div class="fase-count">4</div>
-        <div class="fase-bar-wrap"><div class="fase-bar-fill" style="width:18%;background:linear-gradient(90deg,#14b8a6,#2dd4bf)"></div></div>
-        <div class="fase-valore" style="color:var(--teal)">Conv. 18%</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Top Amministratori / Accenturatori</div>
-        <span class="card-tag tag-target">Pipeline</span>
-      </div>
-      <div class="fase-row"><div class="fase-dot" style="background:#e8c97a"></div><div class="fase-nome">Saletti</div><div class="fase-count">7</div><div class="fase-bar-wrap"><div class="fase-bar-fill" style="width:100%;background:linear-gradient(90deg,#c9a84c,#e8c97a)"></div></div><div class="fase-valore" style="color:#e8c97a">&#8364;580k</div></div>
-      <div class="fase-row"><div class="fase-dot" style="background:#60a5fa"></div><div class="fase-nome">Scalabrino</div><div class="fase-count">5</div><div class="fase-bar-wrap"><div class="fase-bar-fill" style="width:76%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div></div><div class="fase-valore">&#8364;440k</div></div>
-      <div class="fase-row"><div class="fase-dot" style="background:#a78bfa"></div><div class="fase-nome">Chielli</div><div class="fase-count">4</div><div class="fase-bar-wrap"><div class="fase-bar-fill" style="width:59%;background:linear-gradient(90deg,#7c3aed,#a78bfa)"></div></div><div class="fase-valore" style="color:#a78bfa">&#8364;340k</div></div>
-      <div class="fase-row"><div class="fase-dot" style="background:#2dd4bf"></div><div class="fase-nome">Cosimi Catia</div><div class="fase-count">3</div><div class="fase-bar-wrap"><div class="fase-bar-fill" style="width:41%;background:linear-gradient(90deg,#14b8a6,#2dd4bf)"></div></div><div class="fase-valore" style="color:var(--teal)">&#8364;240k</div></div>
-      <div class="fase-row"><div class="fase-dot" style="background:#fb7185"></div><div class="fase-nome">Santucci</div><div class="fase-count">3</div><div class="fase-bar-wrap"><div class="fase-bar-fill" style="width:34%;background:linear-gradient(90deg,#e11d48,#fb7185)"></div></div><div class="fase-valore" style="color:#fb7185">&#8364;200k</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- CANTIERI -->
-<div class="section" id="section-cantieri">
-  <p class="section-title">Reparto <span>Cantieri</span></p>
-  <div style="padding:20px;background:rgba(59,91,219,.06);border:1px solid rgba(59,91,219,.15);border-radius:16px;margin-bottom:24px;display:flex;align-items:center;gap:16px">
-    <div style="font-size:24px">&#128679;</div>
-    <div>
-      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px">Automazione Cantieri in Sviluppo</div>
-      <div style="font-size:13px;color:var(--text2)">L'integrazione automatica Vinto &rarr; Progetto Cantiere &egrave; prevista nel prossimo modulo.</div>
-    </div>
-  </div>
-  <div class="grid-3">
-    <div class="card"><div class="card-label">Vinti in Attesa Avvio</div><div class="card-value big" style="color:#e8c97a">3</div><div class="card-sub">cantieri da avviare</div><div class="card-badge badge-gold">Valore &#8364;680k</div></div>
-    <div class="card"><div class="card-label">Tempo Vinto &rarr; Avvio</div><div class="card-value big">~3 <span style="font-size:16px;color:var(--text2)">mesi</span></div><div class="card-sub">dato storico medio</div><div class="card-badge badge-yellow">Impatta forecast</div></div>
-    <div class="card"><div class="card-label">Durata Media Cantiere</div><div class="card-value big">~3 <span style="font-size:16px;color:var(--text2)">mesi</span></div><div class="card-sub">dato storico medio</div><div class="card-badge badge-yellow">Ciclo totale ~6 mesi</div></div>
+<!-- Row 2: Pipeline per fase + Tipologia donut -->
+<div class="g2">
+  <div class="card">
+    <div class="card-hdr"><div class="card-ttl">Pipeline per Fase Commerciale</div><span class="ctag tg-live">LIVE</span></div>
+    <div id="fasi-rows"></div>
   </div>
   <div class="card">
-    <div class="card-header"><div class="card-title">Implicazione sul Fatturato 2026</div><span class="card-tag tag-target">Analisi</span></div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px">
-      <div style="padding:16px;background:var(--bg3);border-radius:12px"><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Obiettivo Fatturato</div><div style="font-size:24px;font-family:'Playfair Display',serif;font-weight:700;color:#e8c97a">&#8364;3.600.000</div><div style="font-size:12px;color:var(--text3);margin-top:4px">Anno 2026</div></div>
-      <div style="padding:16px;background:var(--bg3);border-radius:12px"><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Vinto Necessario</div><div style="font-size:24px;font-family:'Playfair Display',serif;font-weight:700;color:#2dd4bf">&#8364;4.800.000</div><div style="font-size:12px;color:var(--text3);margin-top:4px">Per garantire &#8364;3.6M fatturato</div></div>
-      <div style="padding:16px;background:var(--bg3);border-radius:12px"><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Deadline Critica</div><div style="font-size:24px;font-family:'Playfair Display',serif;font-weight:700;color:#fbbf24">Giugno '26</div><div style="font-size:12px;color:var(--text3);margin-top:4px">Ciclo 6 mesi totali</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- CONSULENTE AI -->
-<div class="section" id="section-consulente">
-  <p class="section-title">Consulente <span>AI</span></p>
-  <div class="grid-2-1" style="align-items:start">
-    <div class="ai-section">
-      <div class="ai-header">
-        <div class="ai-avatar">&#129302;</div>
-        <div>
-          <div class="ai-title">Consulente La Fenice</div>
-          <div class="ai-subtitle">Conosce tutta la situazione aziendale in tempo reale</div>
-        </div>
-      </div>
-      <div class="ai-messages" id="aiMessages">
-        <div class="msg ai">
-          <div class="msg-avatar ai">F</div>
-          <div class="msg-bubble">Ciao Marco! Sono il tuo consulente aziendale AI. Ho accesso a tutti i dati aggiornati di La Fenice &mdash; pipeline commerciale, preventivi, scostamenti, assemblee, accenturatori.<br><br>Chiedimi qualsiasi cosa sulla situazione aziendale: analisi, previsioni, alert, confronti.</div>
-        </div>
-      </div>
-      <div class="quick-questions">
-        <span class="quick-q" onclick="sendQuick(this)">Come stiamo vs obiettivo 2026?</span>
-        <span class="quick-q" onclick="sendQuick(this)">Quali assemblee sono a rischio?</span>
-        <span class="quick-q" onclick="sendQuick(this)">Dove si blocca la pipeline?</span>
-        <span class="quick-q" onclick="sendQuick(this)">Come sta Riccardo?</span>
-        <span class="quick-q" onclick="sendQuick(this)">Quali accenturatori presidiare?</span>
-        <span class="quick-q" onclick="sendQuick(this)">Analisi motivi di perdita</span>
-      </div>
-      <div class="ai-input-area">
-        <input class="ai-input" id="aiInput" type="text" placeholder="Fai una domanda sulla situazione aziendale..." onkeydown="if(event.key==='Enter')sendMessage()"/>
-        <button class="ai-send" id="aiSendBtn" onclick="sendMessage()">&#10148;</button>
-      </div>
-    </div>
-    <div>
-      <div class="card" style="margin-bottom:16px">
-        <div class="card-header"><div class="card-title">Snapshot Aziendale</div><span class="card-tag tag-live">Contesto AI</span></div>
-        <div style="font-size:12px;color:var(--text2);line-height:2">
-          <div>&#128188; <strong style="color:var(--text)">Pipeline:</strong> &#8364;4.003M (38 deal)</div>
-          <div>&#127919; <strong style="color:var(--text)">Forecast:</strong> &#8364;1.438M</div>
-          <div>&#127942; <strong style="color:var(--text)">Target vinto:</strong> &#8364;4.8M entro giu '26</div>
-          <div>&#128203; <strong style="color:var(--text)">Preventivi attivi:</strong> 38</div>
-          <div>&#9203; <strong style="color:var(--text)">Ferme 14gg+:</strong> 8 trattative</div>
-          <div>&#128197; <strong style="color:var(--text)">Assemblee 30gg:</strong> 5 (&#8364;720k)</div>
-          <div>&#128296; <strong style="color:var(--text)">Scostamento:</strong> 6.8% (target 5%)</div>
-          <div>&#128176; <strong style="color:var(--text)">Costo acq.:</strong> 0.77% del vinto</div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="card-title">Priorit&agrave; Settimana</div></div>
-        <div class="alert-item alert-red"><span class="alert-icon">&#128308;</span><span class="alert-text" style="font-size:12px">5 assemblee entro 30gg &mdash; &#8364;720k in gioco</span></div>
-        <div class="alert-item alert-red"><span class="alert-icon">&#128308;</span><span class="alert-text" style="font-size:12px">8 trattative ferme da riattivare</span></div>
-        <div class="alert-item alert-yellow"><span class="alert-icon">&#128993;</span><span class="alert-text" style="font-size:12px">Scostamento Riccardo sopra target</span></div>
-        <div class="alert-item alert-yellow"><span class="alert-icon">&#128993;</span><span class="alert-text" style="font-size:12px">16 assemblee ancora senza data</span></div>
+    <div class="card-hdr"><div class="card-ttl">Pipeline per Tipologia</div><span class="ctag tg-live">LIVE</span></div>
+    <div class="dw">
+      <svg width="100" height="100" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="38" fill="none" stroke="var(--bg3)" stroke-width="12"/>
+        <circle cx="50" cy="50" r="38" fill="none" stroke="#3b5bdb" stroke-width="12" stroke-dasharray="159 80" stroke-dashoffset="60" transform="rotate(-90 50 50)"/>
+        <circle cx="50" cy="50" r="38" fill="none" stroke="#c9a84c" stroke-width="12" stroke-dasharray="52 187" stroke-dashoffset="-99" transform="rotate(-90 50 50)"/>
+        <circle cx="50" cy="50" r="38" fill="none" stroke="#2dd4bf" stroke-width="12" stroke-dasharray="29 210" stroke-dashoffset="-151" transform="rotate(-90 50 50)"/>
+        <text x="50" y="46" text-anchor="middle" fill="var(--text)" font-size="12" font-family="Playfair Display" font-weight="700">66%</text>
+        <text x="50" y="58" text-anchor="middle" fill="var(--text3)" font-size="8">Cond.</text>
+      </svg>
+      <div class="dl">
+        <div class="li"><div class="li-dot" style="background:#3b5bdb"></div><span class="li-lbl">Condomini</span><span class="li-val">&euro;2.650M</span><span class="li-pct">66%</span></div>
+        <div class="li"><div class="li-dot" style="background:#c9a84c"></div><span class="li-lbl">Privati</span><span class="li-val">&euro;890k</span><span class="li-pct">22%</span></div>
+        <div class="li"><div class="li-dot" style="background:#2dd4bf"></div><span class="li-lbl">PA/Corporate</span><span class="li-val">&euro;463k</span><span class="li-pct">12%</span></div>
       </div>
     </div>
   </div>
 </div>
 
-</div><!-- /container -->
+<!-- Row 3: Tasso chiusura + Tempo medio per fase -->
+<div class="g2">
+  <div class="card">
+    <div class="card-hdr"><div class="card-ttl">Tasso di Chiusura per Tipologia</div></div>
+    <div class="row"><div class="rdot" style="background:#c9a84c"></div><div class="rname">Privati</div><div class="rbar"><div class="rbar-fill f-gold" style="width:35%"></div></div><div class="rval" style="color:var(--gold2)">35%</div><div style="font-size:10px;color:var(--green);margin-left:4px">&#128994;</div></div>
+    <div class="row"><div class="rdot" style="background:#3b5bdb"></div><div class="rname">Condomini</div><div class="rbar"><div class="rbar-fill f-blue" style="width:22%"></div></div><div class="rval">22%</div><div style="font-size:10px;color:var(--yellow);margin-left:4px">&#128993;</div></div>
+    <div class="row"><div class="rdot" style="background:#2dd4bf"></div><div class="rname">PA/Corporate</div><div class="rbar"><div class="rbar-fill f-teal" style="width:18%"></div></div><div class="rval" style="color:var(--teal)">18%</div><div style="font-size:10px;color:var(--red);margin-left:4px">&#128308;</div></div>
+    <div class="div"></div>
+    <div class="card-hdr" style="margin-bottom:10px"><div class="card-ttl">Tempo Medio per Fase (giorni)</div></div>
+    <div class="row"><div class="rdot" style="background:#5c7cfa"></div><div class="rname">In Lavorazione</div><div class="rbar"><div class="rbar-fill f-blue" style="width:40%"></div></div><div class="rval">~12gg</div></div>
+    <div class="row"><div class="rdot" style="background:#a78bfa"></div><div class="rname">Relazione in Corso</div><div class="rbar"><div class="rbar-fill" style="width:60%;background:linear-gradient(90deg,#7c3aed,#a78bfa)"></div></div><div class="rval">~18gg</div></div>
+    <div class="row"><div class="rdot" style="background:#c9a84c"></div><div class="rname">Prev. Presentato</div><div class="rbar"><div class="rbar-fill f-gold" style="width:80%"></div></div><div class="rval" style="color:var(--yellow)">~24gg</div></div>
+    <div class="row"><div class="rdot" style="background:#fbbf24"></div><div class="rname">In Negoziazione</div><div class="rbar"><div class="rbar-fill f-yellow" style="width:50%"></div></div><div class="rval">~15gg</div></div>
+    <div class="row"><div class="rdot" style="background:#2dd4bf"></div><div class="rname">Assemblea Fissata</div><div class="rbar"><div class="rbar-fill f-teal" style="width:30%"></div></div><div class="rval">~9gg</div></div>
+  </div>
+
+  <!-- Top deal aperti -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-ttl">Top 8 Deal Aperti per Valore</div><span class="ctag tg-live">LIVE</span></div>
+    <div id="top-deals"></div>
+  </div>
+</div>
+
+<!-- Row 4: Assemblee + Motivi perdita + Accenturatori -->
+<div class="g3">
+  <!-- Assemblee -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-ttl">Assemblee in Scadenza</div><span class="ctag tg-crit">CRITICO</span></div>
+    <div class="asm-tabs">
+      <div class="atab active" onclick="setAsm(30,this)">30gg</div>
+      <div class="atab" onclick="setAsm(60,this)">60gg</div>
+    </div>
+    <div id="asm-val" style="font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--gold2)">5</div>
+    <div class="card-sub" style="margin-bottom:10px">assemblee in scadenza</div>
+    <div style="padding:10px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:9px">
+      <div style="font-size:11px;color:var(--text3);margin-bottom:3px">Valore a rischio</div>
+      <div id="asm-valore" style="font-size:20px;font-family:'Playfair Display',serif;font-weight:700;color:var(--gold2)">&euro;720.000</div>
+    </div>
+    <div class="status-bar s-red" style="margin-top:10px">&#128308; Priorit&agrave; massima</div>
+  </div>
+
+  <!-- Motivi perdita -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-ttl">Motivi di Perdita (storico)</div></div>
+    <div id="motivi-rows"></div>
+    <div class="div"></div>
+    <div style="font-size:11px;color:var(--text3)">Totale persi: <strong style="color:var(--text)">50</strong> &mdash; <span style="color:var(--red)">12 senza motivo compilato</span></div>
+  </div>
+
+  <!-- Alert operativi -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-ttl">Alert Operativi</div></div>
+    <div class="al al-r"><span class="al-ico">&#9200;</span><span class="al-txt">Trattative ferme 14gg+</span><span class="al-val">8</span></div>
+    <div class="al al-r"><span class="al-ico">&#10067;</span><span class="al-txt">Persi senza motivo perdita</span><span class="al-val">12</span></div>
+    <div class="al al-y"><span class="al-ico">&#128197;</span><span class="al-txt">Assemblee senza data</span><span class="al-val">16</span></div>
+    <div class="al al-r"><span class="al-ico">&#128176;</span><span class="al-txt">Vinti senza importo</span><span class="al-val">2</span></div>
+    <div class="al al-g"><span class="al-ico">&#9989;</span><span class="al-txt">Portfolio campi completi</span><span class="al-val">38/38</span></div>
+    <div class="al al-g"><span class="al-ico">&#9989;</span><span class="al-txt">Sync Asana operativo</span><span class="al-val">OK</span></div>
+  </div>
+</div>
+
+<!-- Row 5: Accenturatori -->
+<div class="card" style="margin-bottom:20px">
+  <div class="card-hdr"><div class="card-ttl">Valore per Amministratore / Accenturatore</div><span class="ctag tg-warn">Pipeline condomini</span></div>
+  <div id="accRows" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0 24px"></div>
+</div>
+
+</div><!-- /sec-c -->
+
+<!-- ===== PREVENTIVI ===== -->
+<div class="sec" id="sec-p">
+<p class="sec-title">Reparto <span>Preventivi</span></p>
+
+<div class="g4">
+  <!-- Preventivi settimana -->
+  <div class="card">
+    <div class="card-lbl">Preventivi Settimana</div>
+    <div style="display:flex;align-items:baseline;gap:6px">
+      <div class="card-val" style="color:var(--yellow)">5</div>
+      <div style="font-size:16px;color:var(--text3)">/ 7</div>
+    </div>
+    <div class="prg-wrap">
+      <div class="prg-bg"><div class="prg-fill f-yellow" style="width:71%"></div></div>
+      <div class="prg-lbls"><span>0</span><span>Target 7/sett</span></div>
+    </div>
+    <div class="status-bar s-yellow">&#128993; 71% del target settimanale</div>
+  </div>
+
+  <!-- Tempo ciclo -->
+  <div class="card">
+    <div class="card-lbl">Tempo Ciclo Medio</div>
+    <div class="card-val" style="color:var(--red)">18 <span style="font-size:16px;color:var(--text2)">gg</span></div>
+    <div class="card-sub">creazione &rarr; completamento</div>
+    <div class="status-bar s-red">&#128308; Sopra target (14gg)</div>
+  </div>
+
+  <!-- Scostamento gauge -->
+  <div class="card">
+    <div class="card-lbl">Scostamento Medio Riccardo</div>
+    <div class="gauge-wrap">
+      <svg viewBox="0 0 180 100" style="width:100%;max-width:180px;display:block;margin:0 auto">
+        <!-- BG arc -->
+        <path d="M20 90 A70 70 0 0 1 160 90" fill="none" stroke="var(--bg3)" stroke-width="12" stroke-linecap="round"/>
+        <!-- Green zone 0-5% (0deg to 90deg) -->
+        <path d="M20 90 A70 70 0 0 1 90 20" fill="none" stroke="rgba(74,222,128,.3)" stroke-width="12" stroke-linecap="round"/>
+        <!-- Yellow zone 5-8% (90deg to 126deg) -->
+        <path d="M90 20 A70 70 0 0 1 139 34" fill="none" stroke="rgba(251,191,36,.35)" stroke-width="12" stroke-linecap="round"/>
+        <!-- Red zone 8%+ (126deg to 180deg) -->
+        <path d="M139 34 A70 70 0 0 1 160 90" fill="none" stroke="rgba(248,113,113,.3)" stroke-width="12" stroke-linecap="round"/>
+        <!-- Needle at 6.8% — 68% of 180deg = ~122deg from left = approx (90+32=122deg) -->
+        <!-- needle tip at angle 122deg from left: x=90+70*cos(180-122)=90+70*cos(58)=90+37=127, y=90-70*sin(58)=90-59=31 -->
+        <line x1="90" y1="90" x2="127" y2="31" stroke="var(--yellow)" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="90" cy="90" r="5" fill="var(--yellow)"/>
+        <!-- Labels -->
+        <text x="14" y="100" fill="var(--green)" font-size="9">0%</text>
+        <text x="82" y="14" fill="var(--yellow)" font-size="9">5%</text>
+        <text x="143" y="28" fill="var(--red)" font-size="9">8%</text>
+        <text x="153" y="100" fill="var(--red)" font-size="9">10%</text>
+        <!-- Value -->
+        <text x="90" y="76" text-anchor="middle" fill="var(--text)" font-size="18" font-family="Playfair Display" font-weight="700">6.8%</text>
+        <text x="90" y="90" text-anchor="middle" fill="var(--text3)" font-size="9">vs target 5%</text>
+      </svg>
+    </div>
+    <div class="status-bar s-yellow">&#128993; Zona attenzione (5-8%)</div>
+  </div>
+
+  <!-- Qualità dati -->
+  <div class="card">
+    <div class="card-lbl">Qualit&agrave; Dati Portfolio</div>
+    <div class="card-val" style="color:var(--green)">94%</div>
+    <div class="prg-wrap">
+      <div class="prg-bg"><div class="prg-fill f-green" style="width:94%"></div></div>
+      <div class="prg-lbls"><span>0%</span><span>Target 100%</span></div>
+    </div>
+    <div class="status-bar s-green">&#128994; 36/38 preventivi completi</div>
+  </div>
+</div>
+
+<div class="g2">
+  <!-- Tipologia + conversione + valore medio -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-ttl">Attivi per Tipologia</div><span class="ctag tg-live">38 totali</span></div>
+    <div class="row"><div class="rdot" style="background:#c9a84c"></div><div class="rname">Privati</div><div class="rcount">8</div><div class="rbar"><div class="rbar-fill f-gold" style="width:21%"></div></div><div class="rval" style="color:var(--gold2)">21%</div></div>
+    <div class="row"><div class="rdot" style="background:#3b5bdb"></div><div class="rname">Condomini</div><div class="rcount">26</div><div class="rbar"><div class="rbar-fill f-blue" style="width:68%"></div></div><div class="rval">68%</div></div>
+    <div class="row"><div class="rdot" style="background:#2dd4bf"></div><div class="rname">PA/Corporate</div><div class="rcount">4</div><div class="rbar"><div class="rbar-fill f-teal" style="width:11%"></div></div><div class="rval" style="color:var(--teal)">11%</div></div>
+    <div class="div"></div>
+    <div class="card-hdr" style="margin-bottom:10px"><div class="card-ttl">Valore Medio Preventivo per Tipologia</div></div>
+    <div class="row"><div class="rdot" style="background:#c9a84c"></div><div class="rname">Privati</div><div class="rbar"><div class="rbar-fill f-gold" style="width:30%"></div></div><div class="rval" style="color:var(--gold2)">&euro;28k</div></div>
+    <div class="row"><div class="rdot" style="background:#3b5bdb"></div><div class="rname">Condomini</div><div class="rbar"><div class="rbar-fill f-blue" style="width:70%"></div></div><div class="rval">&euro;96k</div></div>
+    <div class="row"><div class="rdot" style="background:#2dd4bf"></div><div class="rname">PA/Corporate</div><div class="rbar"><div class="rbar-fill f-teal" style="width:100%"></div></div><div class="rval" style="color:var(--teal)">&euro;116k</div></div>
+    <div class="div"></div>
+    <div class="card-hdr" style="margin-bottom:10px"><div class="card-ttl">Tasso Conversione Preventivo &rarr; Vinto</div></div>
+    <div class="row"><div class="rdot" style="background:#c9a84c"></div><div class="rname">Privati</div><div class="rbar"><div class="rbar-fill f-gold" style="width:35%"></div></div><div class="rval" style="color:var(--gold2)">35%</div><div style="font-size:10px;color:var(--green);margin-left:4px">&#128994;</div></div>
+    <div class="row"><div class="rdot" style="background:#3b5bdb"></div><div class="rname">Condomini</div><div class="rbar"><div class="rbar-fill f-blue" style="width:22%"></div></div><div class="rval">22%</div><div style="font-size:10px;color:var(--yellow);margin-left:4px">&#128993;</div></div>
+    <div class="row"><div class="rdot" style="background:#2dd4bf"></div><div class="rname">PA/Corporate</div><div class="rbar"><div class="rbar-fill f-teal" style="width:18%"></div></div><div class="rval" style="color:var(--teal)">18%</div><div style="font-size:10px;color:var(--red);margin-left:4px">&#128308;</div></div>
+  </div>
+
+  <!-- Accenturatori preventivi -->
+  <div class="card">
+    <div class="card-hdr"><div class="card-ttl">Top Amministratori / Accenturatori</div><span class="ctag tg-warn">Preventivi attivi</span></div>
+    <div class="row"><div class="rdot" style="background:#e8c97a"></div><div class="rname">Saletti</div><div class="rcount">7</div><div class="rbar"><div class="rbar-fill f-gold" style="width:100%"></div></div><div class="rval" style="color:#e8c97a">&euro;580k</div></div>
+    <div class="row"><div class="rdot" style="background:#60a5fa"></div><div class="rname">Scalabrino</div><div class="rcount">5</div><div class="rbar"><div class="rbar-fill f-blue" style="width:76%"></div></div><div class="rval">&euro;440k</div></div>
+    <div class="row"><div class="rdot" style="background:#a78bfa"></div><div class="rname">Chielli</div><div class="rcount">4</div><div class="rbar"><div class="rbar-fill" style="width:59%;background:linear-gradient(90deg,#7c3aed,#a78bfa)"></div></div><div class="rval" style="color:#a78bfa">&euro;340k</div></div>
+    <div class="row"><div class="rdot" style="background:#2dd4bf"></div><div class="rname">Cosimi Catia</div><div class="rcount">3</div><div class="rbar"><div class="rbar-fill f-teal" style="width:41%"></div></div><div class="rval" style="color:var(--teal)">&euro;240k</div></div>
+    <div class="row"><div class="rdot" style="background:#fb7185"></div><div class="rname">Santucci</div><div class="rcount">3</div><div class="rbar"><div class="rbar-fill f-red" style="width:34%"></div></div><div class="rval" style="color:#fb7185">&euro;200k</div></div>
+    <div class="row"><div class="rdot" style="background:#6ee7b7"></div><div class="rname">Berrettini</div><div class="rcount">3</div><div class="rbar"><div class="rbar-fill f-green" style="width:28%"></div></div><div class="rval" style="color:#6ee7b7">&euro;175k</div></div>
+    <div class="row"><div class="rdot" style="background:#fcd34d"></div><div class="rname">VIDA Immobiliare</div><div class="rcount">2</div><div class="rbar"><div class="rbar-fill f-yellow" style="width:20%"></div></div><div class="rval" style="color:#fcd34d">&euro;120k</div></div>
+    <div class="row"><div class="rdot" style="background:#94a3b8"></div><div class="rname">Forte e Aiello</div><div class="rcount">2</div><div class="rbar"><div class="rbar-fill" style="width:16%;background:linear-gradient(90deg,#64748b,#94a3b8)"></div></div><div class="rval" style="color:#94a3b8">&euro;95k</div></div>
+  </div>
+</div>
+</div><!-- /sec-p -->
+
+<!-- ===== CANTIERI ===== -->
+<div class="sec" id="sec-k">
+<p class="sec-title">Reparto <span>Cantieri</span></p>
+<div style="padding:16px 18px;background:rgba(59,91,219,.06);border:1px solid rgba(59,91,219,.15);border-radius:13px;margin-bottom:20px;display:flex;align-items:center;gap:14px">
+  <div style="font-size:22px">&#128679;</div>
+  <div><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px">Automazione Cantieri in Sviluppo</div><div style="font-size:12px;color:var(--text2)">L'integrazione automatica Vinto &rarr; Progetto Cantiere &egrave; prevista nel prossimo modulo. I dati mostrati sono indicativi.</div></div>
+</div>
+<div class="g3">
+  <div class="card"><div class="card-lbl">Vinti in Attesa di Avvio</div><div class="card-val" style="color:var(--gold2)">3</div><div class="card-sub">cantieri da avviare</div><div class="status-bar s-yellow">&#128993; Valore &euro;680k</div></div>
+  <div class="card"><div class="card-lbl">Valore Cantieri da Avviare</div><div class="card-val" style="color:var(--teal)">&euro;680k</div><div class="card-sub">3 cantieri in attesa</div><div class="status-bar s-yellow">&#128993; Avvio previsto entro 3 mesi</div></div>
+  <div class="card"><div class="card-lbl">Tempo Medio Vinto &rarr; Avvio</div><div class="card-val">~3 <span style="font-size:16px;color:var(--text2)">mesi</span></div><div class="card-sub">dato storico medio</div><div class="status-bar s-green">&#128994; In linea con storico</div></div>
+</div>
+<div class="card" style="margin-bottom:20px">
+  <div class="card-hdr"><div class="card-ttl">Modello Previsionale Fatturato 2026</div><span class="ctag tg-warn">Analisi CEO</span></div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:6px">
+    <div style="padding:14px;background:var(--bg3);border-radius:11px"><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Target Fatturato</div><div style="font-size:22px;font-family:'Playfair Display',serif;font-weight:700;color:var(--gold2)">&euro;3.600.000</div><div style="font-size:11px;color:var(--text3);margin-top:3px">Anno 2026</div></div>
+    <div style="padding:14px;background:var(--bg3);border-radius:11px"><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Vinto Necessario</div><div style="font-size:22px;font-family:'Playfair Display',serif;font-weight:700;color:var(--teal)">&euro;4.800.000</div><div style="font-size:11px;color:var(--text3);margin-top:3px">Per garantire target</div></div>
+    <div style="padding:14px;background:var(--bg3);border-radius:11px"><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Durata Media Cantiere</div><div style="font-size:22px;font-family:'Playfair Display',serif;font-weight:700;color:var(--yellow)">3 mesi</div><div style="font-size:11px;color:var(--text3);margin-top:3px">Avvio + esecuzione</div></div>
+    <div style="padding:14px;background:var(--bg3);border-radius:11px"><div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Deadline Critica Vinto</div><div style="font-size:22px;font-family:'Playfair Display',serif;font-weight:700;color:var(--red)">Giu '26</div><div style="font-size:11px;color:var(--text3);margin-top:3px">Ciclo 6 mesi totali</div></div>
+  </div>
+</div>
+</div><!-- /sec-k -->
+
+<!-- ===== CONSULENTE AI ===== -->
+<div class="sec" id="sec-a">
+<p class="sec-title">Consulente <span>AI</span></p>
+<div class="g21">
+  <div class="ai-wrap">
+    <div class="ai-hdr">
+      <div class="ai-av">&#129302;</div>
+      <div><div class="ai-ttl">Consulente La Fenice</div><div class="ai-sub">Analisi aziendale in tempo reale &mdash; conosce tutti i dati</div></div>
+    </div>
+    <div class="ai-msgs" id="aiMsgs">
+      <div class="msg ai">
+        <div class="mav ai">F</div>
+        <div class="mb">Ciao Marco! Sono il tuo consulente aziendale AI. Ho accesso a tutti i KPI aggiornati di La Fenice.<br><br>Posso analizzare la pipeline, confrontarti con gli obiettivi, identificare rischi e opportunit&agrave;. Cosa vuoi sapere?</div>
+      </div>
+    </div>
+    <div class="qq">
+      <span class="q" onclick="sq(this)">Come stiamo vs obiettivo 2026?</span>
+      <span class="q" onclick="sq(this)">Assemblee a rischio?</span>
+      <span class="q" onclick="sq(this)">Dove si blocca la pipeline?</span>
+      <span class="q" onclick="sq(this)">Analisi Riccardo</span>
+      <span class="q" onclick="sq(this)">Accenturatori da presidiare</span>
+      <span class="q" onclick="sq(this)">Motivi di perdita principali</span>
+    </div>
+    <div class="ai-inp-area">
+      <input class="ai-inp" id="aiInp" type="text" placeholder="Fai una domanda sulla situazione aziendale..." onkeydown="if(event.key==='Enter')sm()"/>
+      <button class="ai-btn" id="aiBtn" onclick="sm()">&#10148;</button>
+    </div>
+    <div class="ai-note">&#9888; Il consulente AI richiede connessione internet e API key configurata nell'agente Python</div>
+  </div>
+  <div>
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-hdr"><div class="card-ttl">Snapshot Aziendale</div><span class="ctag tg-live">Contesto AI</span></div>
+      <div style="font-size:12px;color:var(--text2);line-height:2.2">
+        <div>&#128188; <strong style="color:var(--text)">Pipeline:</strong> &euro;4.003M (38 deal)</div>
+        <div>&#127919; <strong style="color:var(--text)">Forecast:</strong> &euro;1.438M</div>
+        <div>&#127942; <strong style="color:var(--text)">Target vinto:</strong> &euro;4.8M entro giu '26</div>
+        <div>&#128203; <strong style="color:var(--text)">Prev. attivi:</strong> 38 (5 completati/sett)</div>
+        <div>&#9203; <strong style="color:var(--text)">Ferme 14gg+:</strong> 8 trattative</div>
+        <div>&#128197; <strong style="color:var(--text)">Assemblee 30gg:</strong> 5 (&euro;720k)</div>
+        <div>&#128296; <strong style="color:var(--text)">Scostamento:</strong> 6.8% (target 5%)</div>
+        <div>&#128176; <strong style="color:var(--text)">Costo acq.:</strong> 0.77% del vinto</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hdr"><div class="card-ttl">Priorit&agrave; Settimana</div></div>
+      <div class="al al-r"><span class="al-ico">&#128308;</span><span class="al-txt" style="font-size:12px">5 assemblee entro 30gg &mdash; &euro;720k</span></div>
+      <div class="al al-r"><span class="al-ico">&#128308;</span><span class="al-txt" style="font-size:12px">8 trattative ferme da riattivare</span></div>
+      <div class="al al-y"><span class="al-ico">&#128993;</span><span class="al-txt" style="font-size:12px">Scostamento Riccardo sopra target</span></div>
+      <div class="al al-y"><span class="al-ico">&#128993;</span><span class="al-txt" style="font-size:12px">16 assemblee senza data da fissare</span></div>
+    </div>
+  </div>
+</div>
+</div><!-- /sec-a -->
+
+</div><!-- /wrap -->
 
 <script>
-const DATA = {
+// Dati
+const D={
   fasi:[
-    {nome:"In Lavorazione",valore:850000,count:12,color:"#5c7cfa"},
-    {nome:"Relazione in Corso",valore:420000,count:5,color:"#a78bfa"},
-    {nome:"Preventivo Presentato",valore:980000,count:8,color:"#c9a84c"},
-    {nome:"In Negoziazione",valore:650000,count:6,color:"#fbbf24"},
-    {nome:"Assemblea Fissata",valore:720000,count:7,color:"#2dd4bf"},
-    {nome:"Decisione Rinviata",valore:383306,count:4,color:"#6b7280"}
+    {n:"In Lavorazione",v:850000,c:12,col:"#5c7cfa"},
+    {n:"Relazione in Corso",v:420000,c:5,col:"#a78bfa"},
+    {n:"Preventivo Presentato",v:980000,c:8,col:"#c9a84c"},
+    {n:"In Negoziazione",v:650000,c:6,col:"#fbbf24"},
+    {n:"Assemblea Fissata",v:720000,c:7,col:"#2dd4bf"},
+    {n:"Decisione Rinviata",v:383306,c:4,col:"#6b7280"}
   ],
   motivi:[
-    {motivo:"Prezzo",count:18},
-    {motivo:"Concorrenza",count:12},
-    {motivo:"Nessuna Risposta",count:9},
-    {motivo:"Tempi",count:7},
-    {motivo:"Fiducia",count:4}
-  ]
+    {m:"Prezzo",c:18},{m:"Concorrenza",c:12},{m:"Nessuna Risposta",c:9},{m:"Tempi",c:7},{m:"Fiducia",c:4}
+  ],
+  deals:[
+    {n:"Saletti via Canada",f:"In Negoziazione",v:401600},
+    {n:"Via Sauro 11 - Scalabrino",f:"Assemblea Fissata",v:380000},
+    {n:"Fibran - Foresteria",f:"Assemblea Fissata",v:350000},
+    {n:"MARCA - Via Mozambico 46",f:"Preventivo Presentato",v:320000},
+    {n:"Machado - Via Ungheria 2-8",f:"Relazione in Corso",v:290000},
+    {n:"Via Michelangelo 26 - Forte",f:"Preventivo Presentato",v:260000},
+    {n:"Puntala Residence Aleluja",f:"Preventivo Presentato",v:240000},
+    {n:"Via Campania 9 - Saletti",f:"Assemblea Fissata",v:220000}
+  ],
+  acc:[
+    {n:"Saletti",p:7,v:580000},{n:"Scalabrino",p:5,v:440000},{n:"Chielli",p:4,v:340000},
+    {n:"Cosimi Catia",p:3,v:240000},{n:"Santucci",p:3,v:200000},{n:"Berrettini",p:3,v:175000}
+  ],
+  cols:["#e8c97a","#60a5fa","#a78bfa","#2dd4bf","#fb7185","#6ee7b7"]
 };
 
+function fmt(v){return v>=1000000?'€'+(v/1000000).toFixed(3)+'M':'€'+(v/1000).toFixed(0)+'k'}
+
 function renderFasi(){
-  const max=Math.max(...DATA.fasi.map(f=>f.valore));
-  document.getElementById("faseRows").innerHTML=DATA.fasi.map(f=>`
-    <div class="fase-row">
-      <div class="fase-dot" style="background:${f.color}"></div>
-      <div class="fase-nome">${f.nome}</div>
-      <div class="fase-count">${f.count}</div>
-      <div class="fase-bar-wrap"><div class="fase-bar-fill" style="width:${Math.round(f.valore/max*100)}%;background:${f.color}"></div></div>
-      <div class="fase-valore">&euro;${(f.valore/1000).toFixed(0)}k</div>
-    </div>`).join("");
+  const mx=Math.max(...D.fasi.map(f=>f.v));
+  document.getElementById("fasi-rows").innerHTML=D.fasi.map(f=>`
+    <div class="row">
+      <div class="rdot" style="background:${f.col}"></div>
+      <div class="rname">${f.n}</div>
+      <div class="rcount">${f.c}</div>
+      <div class="rbar"><div class="rbar-fill" style="width:${Math.round(f.v/mx*100)}%;background:${f.col}"></div></div>
+      <div class="rval">&euro;${(f.v/1000).toFixed(0)}k</div>
+    </div>`).join('');
 }
 
 function renderMotivi(){
-  const max=Math.max(...DATA.motivi.map(m=>m.count));
-  document.getElementById("motiviRows").innerHTML=DATA.motivi.map(m=>`
-    <div class="motivo-row">
-      <div class="motivo-label">${m.motivo}</div>
-      <div class="motivo-bar-wrap"><div class="motivo-bar" style="width:${Math.round(m.count/max*100)}%"></div></div>
-      <div class="motivo-count">${m.count}</div>
-    </div>`).join("");
+  const mx=Math.max(...D.motivi.map(m=>m.c));
+  document.getElementById("motivi-rows").innerHTML=D.motivi.map(m=>`
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+      <div style="font-size:12px;color:var(--text2);width:130px;flex-shrink:0">${m.m}</div>
+      <div style="flex:1;height:5px;background:var(--bg3);border-radius:3px;overflow:hidden"><div style="height:100%;border-radius:3px;background:linear-gradient(90deg,var(--red),#fb7185);width:${Math.round(m.c/mx*100)}%"></div></div>
+      <div style="font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;width:20px;text-align:right">${m.c}</div>
+    </div>`).join('');
 }
 
-function showSection(name,btn){
-  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-  document.querySelectorAll(".nav-tab").forEach(t=>t.classList.remove("active"));
-  document.getElementById("section-"+name).classList.add("active");
-  btn.classList.add("active");
+function renderDeals(){
+  const fCol={
+    "In Lavorazione":"#5c7cfa","Relazione in Corso":"#a78bfa","Preventivo Presentato":"#c9a84c",
+    "In Negoziazione":"#fbbf24","Assemblea Fissata":"#2dd4bf","Decisione Rinviata":"#6b7280"
+  };
+  document.getElementById("top-deals").innerHTML=D.deals.map(d=>`
+    <div class="deal-row">
+      <div class="deal-n">${d.n}</div>
+      <div class="deal-fase" style="color:${fCol[d.f]||'var(--text3)'}">${d.f}</div>
+      <div class="deal-val">&euro;${(d.v/1000).toFixed(0)}k</div>
+    </div>`).join('');
 }
 
-// Update last update time
-document.getElementById("lastUpdate").textContent="Aggiornato: "+new Date().toLocaleString("it-IT",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
+function renderAcc(){
+  const mx=Math.max(...D.acc.map(a=>a.v));
+  document.getElementById("accRows").innerHTML=D.acc.map((a,i)=>`
+    <div class="row" style="border-bottom:1px solid var(--border)">
+      <div class="rdot" style="background:${D.cols[i]}"></div>
+      <div class="rname">${a.n}</div>
+      <div class="rcount">${a.p}</div>
+      <div class="rbar"><div class="rbar-fill" style="width:${Math.round(a.v/mx*100)}%;background:${D.cols[i]}"></div></div>
+      <div class="rval" style="color:${D.cols[i]}">&euro;${(a.v/1000).toFixed(0)}k</div>
+    </div>`).join('');
+}
 
-const SYSTEM=`Sei il consulente aziendale AI di Marco Grimaldi, titolare di La Fenice Costruzioni S.r.l. (Grosseto, ~30 dipendenti, fatturato target 2026: 3.6M euro).
+// Assemblee toggle
+const asmData={30:{n:5,v:720000},60:{n:9,v:1150000}};
+function setAsm(days,btn){
+  document.querySelectorAll('.atab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('asm-val').textContent=asmData[days].n;
+  document.getElementById('asm-valore').innerHTML='&euro;'+asmData[days].v.toLocaleString('it-IT');
+}
+
+// Nav
+function show(id,btn){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.ntab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Timestamp
+document.getElementById('ts').textContent='Aggiornato: '+new Date().toLocaleString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+
+// AI Consulente
+const SYS=`Sei il consulente aziendale AI di Marco Grimaldi, titolare di La Fenice Costruzioni S.r.l. (Grosseto, ~30 dipendenti).
 Rispondi sempre in italiano, in modo diretto e pratico come un CFO/consulente senior. Sii conciso e orientato all'azione.
-
-DATI ATTUALI AGGIORNATI:
-- Pipeline commerciale: 4.003.306 euro (38 deal aperti)
-- Forecast ponderato: 1.438.157 euro (36% della pipeline)
-- Target vinto 2026: 4.800.000 euro (per garantire 3.6M fatturato con ciclo 6 mesi)
-- Deadline critica vinto: entro giugno 2026
-- Vinto 2026 YTD: dati in aggiornamento
-- Pipeline per tipologia: Condomini 66% (2.65M), Privati 22% (890k), PA 12% (463k)
-- Fasi pipeline: In Lavorazione 850k/12 deal, Relazione in Corso 420k/5, Preventivo Presentato 980k/8, In Negoziazione 650k/6, Assemblea Fissata 720k/7, Decisione Rinviata 383k/4
-- Trattative ferme 14gg+: 8
-- Assemblee prossimi 30gg: 5 (valore 720.000 euro)
-- Assemblee senza data: 16
-- Persi senza motivo compilato: 12
-- Motivi perdita: Prezzo 18, Concorrenza 12, Nessuna Risposta 9, Tempi 7, Fiducia 4
+TARGET 2026: fatturato €3.6M, vinto necessario €4.8M entro giugno 2026 (ciclo 6 mesi vinto→fatturato).
+DATI ATTUALI:
+- Pipeline: €4.003M (38 deal) | Forecast ponderato: €1.438M
+- Per tipologia: Condomini 66% €2.65M, Privati 22% €890k, PA 12% €463k
+- Fasi: In Lavorazione €850k/12, Relazione €420k/5, Prev.Presentato €980k/8, Negoziazione €650k/6, Assemblea €720k/7, Dec.Rinviata €383k/4
+- Trattative ferme 14gg+: 8 | Assemblee 30gg: 5 (€720k) | 60gg: 9 (€1.15M)
+- Assemblee senza data: 16 | Persi senza motivo: 12 | Vinti senza importo: 2
+- Motivi perdita: Prezzo 18, Concorrenza 12, No Risposta 9, Tempi 7, Fiducia 4
 - Tasso conversione: Privati 35%, Condomini 22%, PA 18%
-- Top accenturatori: Saletti 7 progetti 580k, Scalabrino 5 440k, Chielli 4 340k, Cosimi 3 240k, Santucci 3 200k
-- Preventivi attivi portfolio: 38
-- Preventivi completati questa settimana: 5 (target 7)
-- Scostamento medio Riccardo: 6.8% (target <5%)
-- Tempo ciclo medio preventivi: 18 giorni (target <14)
-- Qualita dati portfolio: 94% campi compilati
-- Costo acquisizione Davide Corridori: 37.200 euro/anno = 0.77% del vinto (benchmark settore 2-5%)
-- Vinti in attesa avvio cantiere: 3 (valore 680k)
-- Ciclo tipico: vinto -> avvio 3 mesi -> cantiere 3 mesi = 6 mesi totali
-- Sistema automazione: agenti Python su server Windows, sync orario con Asana, alert Telegram automatici
+- Accenturatori: Saletti 7/€580k, Scalabrino 5/€440k, Chielli 4/€340k, Cosimi 3/€240k
+- Top deal: Saletti Canada €401k (Neg.), Scalabrino Sauro €380k (Ass.), Fibran €350k (Ass.)
+- Preventivi settimana: 5/7 | Tempo ciclo: 18gg (target 14) | Scostamento Riccardo: 6.8% (target 5%)
+- Qualità dati: 94% | Costo acquisizione Davide: 0.77% (eccellente, benchmark 2-5%)
+- Vinti in attesa cantiere: 3 (€680k) | Tempo vinto→avvio: 3 mesi | Durata cantiere: 3 mesi
 Quando vedi problemi suggerisci azioni concrete e prioritizzate.`;
 
-const chatHistory=[];
-
-async function sendMessage(){
-  const input=document.getElementById("aiInput");
-  const msg=input.value.trim();
+const hist=[];
+async function sm(){
+  const inp=document.getElementById('aiInp');
+  const msg=inp.value.trim();
   if(!msg)return;
-  input.value="";
-  addMsg(msg,"user");
-  chatHistory.push({role:"user",content:msg});
-  document.getElementById("aiSendBtn").disabled=true;
-  const tid="t"+Date.now();
-  addTyping(tid);
+  inp.value='';
+  addMsg(msg,'u');
+  hist.push({role:'user',content:msg});
+  document.getElementById('aiBtn').disabled=true;
+  const tid='t'+Date.now();
+  addTyp(tid);
   try{
-    const r=await fetch("https://api.anthropic.com/v1/messages",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,system:SYSTEM,messages:chatHistory})
+    const r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:SYS,messages:hist})
     });
     const d=await r.json();
-    removeTyping(tid);
-    const text=d.content?.[0]?.text||"Errore nella risposta.";
-    chatHistory.push({role:"assistant",content:text});
-    addMsg(text,"ai");
+    rmTyp(tid);
+    const t=d.content?.[0]?.text||'Errore.';
+    hist.push({role:'assistant',content:t});
+    addMsg(t,'ai');
   }catch(e){
-    removeTyping(tid);
-    addMsg("Errore di connessione. Riprova.","ai");
+    rmTyp(tid);
+    addMsg('Errore di connessione. Il consulente AI funzionerà quando l\'agente Python sarà configurato con l\'API key.','ai');
   }
-  document.getElementById("aiSendBtn").disabled=false;
+  document.getElementById('aiBtn').disabled=false;
 }
-
-function sendQuick(el){document.getElementById("aiInput").value=el.textContent;sendMessage();}
-
-function addMsg(text,role){
-  const c=document.getElementById("aiMessages");
-  const d=document.createElement("div");
-  d.className="msg "+role;
-  d.innerHTML=`<div class="msg-avatar ${role}">${role==="ai"?"F":"M"}</div><div class="msg-bubble">${text.replace(/\n/g,"<br>").replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>")}</div>`;
+function sq(el){document.getElementById('aiInp').value=el.textContent;sm();}
+function addMsg(txt,r){
+  const c=document.getElementById('aiMsgs');
+  const d=document.createElement('div');
+  d.className='msg '+r;
+  d.innerHTML=`<div class="mav ${r}">${r==='ai'?'F':'M'}</div><div class="mb">${txt.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')}</div>`;
   c.appendChild(d);c.scrollTop=c.scrollHeight;
 }
-
-function addTyping(id){
-  const c=document.getElementById("aiMessages");
-  const d=document.createElement("div");
-  d.className="msg ai";d.id=id;
-  d.innerHTML=`<div class="msg-avatar ai">F</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+function addTyp(id){
+  const c=document.getElementById('aiMsgs');
+  const d=document.createElement('div');
+  d.className='msg ai';d.id=id;
+  d.innerHTML=`<div class="mav ai">F</div><div class="typing"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
   c.appendChild(d);c.scrollTop=c.scrollHeight;
 }
+function rmTyp(id){const e=document.getElementById(id);if(e)e.remove();}
 
-function removeTyping(id){const e=document.getElementById(id);if(e)e.remove();}
-
-renderFasi();renderMotivi();
+renderFasi();renderMotivi();renderDeals();renderAcc();
 </script>
 </body>
 </html>
