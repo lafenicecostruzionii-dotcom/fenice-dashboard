@@ -446,6 +446,8 @@ header{padding:24px 0 20px;border-bottom:1px solid var(--border);margin-bottom:2
     <div class="ai-hdr">
       <div class="ai-av">&#129302;</div>
       <div><div class="ai-ttl">Consulente La Fenice</div><div class="ai-sub">Analisi aziendale in tempo reale &mdash; conosce tutti i dati</div></div>
+      <button onclick="showApiKeyModal()" style="background:rgba(59,91,219,.2);border:1px solid rgba(59,91,219,.3);border-radius:7px;padding:4px 10px;font-size:11px;color:var(--blue);cursor:pointer;white-space:nowrap">&#128273; API Key</button>
+      <span id="ai-key-status" style="font-size:10px;color:var(--text3)">&#9888; Key non configurata</div>
     </div>
     <div class="ai-msgs" id="aiMsgs">
       <div class="msg ai">
@@ -465,12 +467,12 @@ header{padding:24px 0 20px;border-bottom:1px solid var(--border);margin-bottom:2
       <input class="ai-inp" id="aiInp" type="text" placeholder="Fai una domanda sulla situazione aziendale..." onkeydown="if(event.key==='Enter')sm()"/>
       <button class="ai-btn" id="aiBtn" onclick="sm()">&#10148;</button>
     </div>
-    <div class="ai-note">&#9888; Il consulente AI richiede connessione internet e API key configurata nell'agente Python</div>
+    <div class="ai-note">&#9888; Clicca "API Key" in alto per configurare la tua Anthropic API Key. Viene salvata solo nel tuo browser.</div>
   </div>
   <div>
     <div class="card" style="margin-bottom:14px">
       <div class="card-hdr"><div class="card-ttl">Snapshot Aziendale</div><span class="ctag tg-live">Contesto AI</span></div>
-      <div style="font-size:12px;color:var(--text2);line-height:2.2">
+      <div style="font-size:12px;color:var(--text2);line-height:2.2" id="ai-snap">
         <div>&#128188; <strong style="color:var(--text)">Pipeline:</strong> &euro;4.003M (38 deal)</div>
         <div>&#127919; <strong style="color:var(--text)">Forecast:</strong> &euro;1.438M</div>
         <div>&#127942; <strong style="color:var(--text)">Target vinto:</strong> &euro;4.8M entro giu '26</div>
@@ -495,8 +497,118 @@ header{padding:24px 0 20px;border-bottom:1px solid var(--border);margin-bottom:2
 </div><!-- /wrap -->
 
 <script>
-// Dati
+// Carica data.json e popola dashboard
+let D_raw = null;
+
+async function loadData() {
+  try {
+    const r = await fetch('data.json?t='+Date.now());
+    if (!r.ok) throw new Error('no data.json');
+    D_raw = await r.json();
+    applyData(D_raw);
+    document.getElementById('ts').textContent = 'Aggiornato: ' + (D_raw.aggiornato || new Date().toLocaleString('it-IT'));
+  } catch(e) {
+    console.warn('data.json non trovato, uso dati demo');
+    D_raw = null;
+    applyData(null);
+    document.getElementById('ts').textContent = 'Demo — dati statici';
+  }
+}
+
+function applyData(d) {
+  if (!d) { renderFasi(); renderMotivi(); renderDeals(); renderAcc(); return; }
+
+  // Vinto YTD
+  const vp = d.vinto_ytd / d.obiettivi.vinto_annuo * 100;
+  document.getElementById('v-vinto').innerHTML = '&euro;' + fmtM(d.vinto_ytd);
+  document.getElementById('v-vinto-bar').style.width = Math.min(vp, 100) + '%';
+  const [sc, ic, lc] = vp >= 80 ? ['s-green','&#128994;','In target'] : vp >= 50 ? ['s-yellow','&#128993;','Attenzione'] : ['s-red','&#128308;','Sotto target'];
+  document.getElementById('v-vinto-status').className = 'status-bar ' + sc;
+  document.getElementById('v-vinto-status').innerHTML = ic + ' ' + Math.round(vp) + '% del target &euro;' + fmtM(d.obiettivi.vinto_annuo);
+
+  // Pipeline
+  document.querySelector('#sec-c .g4 .card:nth-child(2) .card-val').innerHTML = '&euro;' + fmtM(d.pipeline_lordo);
+  document.querySelector('#sec-c .g4 .card:nth-child(2) .card-sub').textContent = d.pipeline_count + ' trattative aperte';
+  document.querySelector('#sec-c .g4 .card:nth-child(3) .card-val').innerHTML = '&euro;' + fmtM(d.forecast_ponderato);
+
+  // Assemblee
+  document.getElementById('asm-val').textContent = d.assemblee_30gg;
+  document.getElementById('asm-valore').innerHTML = '&euro;' + (d.assemblee_30gg_val||0).toLocaleString('it-IT');
+  asmData[30] = {n: d.assemblee_30gg, v: d.assemblee_30gg_val||0};
+  asmData[60] = {n: d.assemblee_60gg, v: d.assemblee_60gg_val||0};
+
+  // Alert
+  document.querySelector('.al-r .al-val').textContent = d.ferme_14gg;
+  const alVals = document.querySelectorAll('.al-val');
+  if (alVals[1]) alVals[1].textContent = d.persi_senza_motivo;
+  if (alVals[2]) alVals[2].textContent = d.senza_data_ass;
+  if (alVals[3]) alVals[3].textContent = d.vinti_senza_importo;
+
+  // Fasi, motivi, deal, acc da dati reali
+  D.fasi = (d.fasi||[]).map(f => ({n:f.nome,v:f.valore,c:f.count,col:fasiColori[f.nome]||'#6b7280'}));
+  D.motivi = (d.motivi_perdita||[]).map(m => ({m:m.motivo,c:m.count}));
+  D.deals = (d.top_deals||[]).map(t => ({n:t.nome,f:t.fase,v:t.importo}));
+  D.acc = (d.accenturatori||[]).slice(0,8).map(a => ({n:a.nome,p:a.progetti,v:a.valore}));
+
+  renderFasi(); renderMotivi(); renderDeals(); renderAcc();
+
+  // Aggiorna snapshot AI
+  updateAISnapshot(d);
+}
+
+const fasiColori = {
+  "In Lavorazione":"#5c7cfa","Relazione in Corso":"#a78bfa","Preventivo Presentato":"#c9a84c",
+  "In Negoziazione":"#fbbf24","Assemblea Fissata":"#2dd4bf","Decisione Rinviata":"#6b7280"
+};
+
+function fmtM(v) {
+  if (!v) return '0';
+  if (v >= 1000000) return (v/1000000).toFixed(3).replace('.',',') + 'M';
+  if (v >= 1000) return (v/1000).toFixed(0) + 'k';
+  return v.toFixed(0);
+}
+
+function updateAISnapshot(d) {
+  const snap = document.getElementById('ai-snap');
+  if (!snap || !d) return;
+  snap.innerHTML = `
+    <div>&#128188; <strong style="color:var(--text)">Pipeline:</strong> &euro;${fmtM(d.pipeline_lordo)} (${d.pipeline_count} deal)</div>
+    <div>&#127919; <strong style="color:var(--text)">Forecast:</strong> &euro;${fmtM(d.forecast_ponderato)}</div>
+    <div>&#127942; <strong style="color:var(--text)">Vinto YTD:</strong> &euro;${fmtM(d.vinto_ytd)}</div>
+    <div>&#128203; <strong style="color:var(--text)">Prev. attivi:</strong> ${d.prev_attivi}</div>
+    <div>&#9203; <strong style="color:var(--text)">Ferme 14gg+:</strong> ${d.ferme_14gg}</div>
+    <div>&#128197; <strong style="color:var(--text)">Assemblee 30gg:</strong> ${d.assemblee_30gg} (&euro;${fmtM(d.assemblee_30gg_val)})</div>
+    <div>&#128296; <strong style="color:var(--text)">Scostamento:</strong> ${d.scostamento_medio}% (target 5%)</div>
+    <div>&#128176; <strong style="color:var(--text)">Costo acq.:</strong> ${d.costo_acquisizione}%</div>
+  `;
+}
+
+// Gestione API key
+function getApiKey() {
+  return localStorage.getItem('fenice_api_key') || '';
+}
+
+function showApiKeyModal() {
+  const k = prompt('Inserisci la tua Anthropic API Key per il Consulente AI:\n(viene salvata solo nel tuo browser)', getApiKey());
+  if (k !== null) {
+    localStorage.setItem('fenice_api_key', k.trim());
+    if (k.trim()) {
+      document.getElementById('ai-key-status').textContent = '&#9989; API Key configurata';
+      document.getElementById('ai-key-status').style.color = 'var(--green)';
+    }
+  }
+}
+
+// Dati demo fallback
 const D={
+  fasi:[
+    {n:"In Lavorazione",v:850000,c:12,col:"#5c7cfa"},
+    {n:"Relazione in Corso",v:420000,c:5,col:"#a78bfa"},
+    {n:"Preventivo Presentato",v:980000,c:8,col:"#c9a84c"},
+    {n:"In Negoziazione",v:650000,c:6,col:"#fbbf24"},
+    {n:"Assemblea Fissata",v:720000,c:7,col:"#2dd4bf"},
+    {n:"Decisione Rinviata",v:383306,c:4,col:"#6b7280"}
+  ],
   fasi:[
     {n:"In Lavorazione",v:850000,c:12,col:"#5c7cfa"},
     {n:"Relazione in Corso",v:420000,c:5,col:"#a78bfa"},
@@ -625,10 +737,17 @@ async function sm(){
   const tid='t'+Date.now();
   addTyp(tid);
   try{
+    const apiKey = getApiKey();
+    if (!apiKey) {
+      rmTyp(tid);
+      addMsg('Per usare il Consulente AI clicca su "Configura API Key" in alto a destra nella sezione AI.','ai');
+      document.getElementById('aiBtn').disabled=false;
+      return;
+    }
     const r=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:SYS,messages:hist})
+      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:SYS+(D_raw?'\nDATI LIVE: '+JSON.stringify({pipeline:D_raw.pipeline_lordo,forecast:D_raw.forecast_ponderato,vinto_ytd:D_raw.vinto_ytd,ferme:D_raw.ferme_14gg,assemblee30:D_raw.assemblee_30gg}):''),messages:hist})
     });
     const d=await r.json();
     rmTyp(tid);
@@ -658,7 +777,8 @@ function addTyp(id){
 }
 function rmTyp(id){const e=document.getElementById(id);if(e)e.remove();}
 
-renderFasi();renderMotivi();renderDeals();renderAcc();
+loadData();
+if(getApiKey()){document.getElementById("ai-key-status").textContent="&#9989; API Key configurata";document.getElementById("ai-key-status").style.color="var(--green)"}
 </script>
 </body>
 </html>
